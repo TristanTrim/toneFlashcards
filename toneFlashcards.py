@@ -37,6 +37,7 @@ def getUserInput(tone):
     userGuess = getch()
     if userGuess.lower() == tone[0].lower():
         print("Yay! It was {}, {}, ".format(tone,scale[tone])),
+        playTone[tone]()
         return('correct')
     elif userGuess.lower() == 'r':
         playTone[tone]()
@@ -45,11 +46,13 @@ def getUserInput(tone):
         print("bye~")
         return('quit')
     else:
-        print("nope, it was {}, {},".format(tone,scale[tone])),
-        return('incorrect')
+        #print("nope, it was {}, {},".format(tone,scale[tone])),
+        playTone[userGuess.upper()+"5"]()
+        return(getUserInput(tone))
+        #return('incorrect')
 
 def appendStatus(tone,correct,left,guesses):
-    playTone[tone]()
+    #playTone[tone]()
     print("   {0} correct, {1} left, {2} guesses".format(correct,left,guesses))
     time.sleep(1)
 

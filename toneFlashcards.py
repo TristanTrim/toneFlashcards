@@ -33,22 +33,22 @@ def generate_tone(tone,amplitude=0.5):
     del foo
     return soundblob
 
-def getUserInput(tone):
+def getUserInput(tone,guesses):
     userGuess = getch()
     if userGuess.lower() == tone[0].lower():
         print("Yay! It was {}, {}, ".format(tone,scale[tone])),
         playTone[tone]()
-        return('correct')
+        return('correct',guesses+1)
     elif userGuess.lower() == 'r':
         playTone[tone]()
-        return(getUserInput(tone))
+        return(getUserInput(tone,guesses))
     elif userGuess.lower() == 'q':
         print("bye~")
         return('quit')
     else:
         #print("nope, it was {}, {},".format(tone,scale[tone])),
         playTone[userGuess.upper()+"5"]()
-        return(getUserInput(tone))
+        return(getUserInput(tone,guesses+1))
         #return('incorrect')
 
 def appendStatus(tone,correct,left,guesses):
@@ -86,7 +86,8 @@ def startGame():
             tone = random.choice(gameScale)
             playTone[tone]()
 
-            userInput = getUserInput(tone)
+            userInput,guessesThisTurn = getUserInput(tone,0)
+            guesses+=guessesThisTurn
 
             if userInput == 'correct':
                 gameScale.remove(tone)

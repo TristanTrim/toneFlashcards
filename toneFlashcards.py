@@ -44,7 +44,7 @@ def getUserInput(tone,guesses):
         return(getUserInput(tone,guesses))
     elif userGuess.lower() == 'q':
         print("bye~")
-        return('quit')
+        return('quit',guesses)
     else:
         #print("nope, it was {}, {},".format(tone,scale[tone])),
         playTone[userGuess.upper()+"5"]()
@@ -92,10 +92,8 @@ def startGame():
             if userInput == 'correct':
                 gameScale.remove(tone)
                 correct+=1
-                guesses+=1
                 appendStatus(tone,correct,len(gameScale),guesses)
             elif userInput == 'incorrect':
-                guesses+=1
                 appendStatus(tone,correct,len(gameScale),guesses)
             elif userInput == 'quit':
                 playing=False
